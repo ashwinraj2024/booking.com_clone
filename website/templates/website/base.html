@@ -5,21 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Booking.com{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'website/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'website/css/style.css' %}?v=3">
 </head>
 <body>
     <header class="site-header">
-        <div class="header-top">
-            <a class="logo" href="{% url 'home' %}">Booking.com</a>
-            <div class="account">
-                <a href="{% url 'signup' %}">Sign Up</a>
-                <a href="{% url 'login' %}">Login</a>
+        <div class="header-inner">
+            <div class="header-top">
+                <a class="logo" href="{% url 'home' %}">Booking.com</a>
+                <div class="auth-links">
+                    <a class="nav-button" href="{% url 'signup' %}">Sign Up</a>
+                    <a class="nav-button" href="{% url 'login' %}">Login</a>
+                </div>
             </div>
+            <nav class="nav">
+                <a class="nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">🏠 Home</a>
+                <a class="nav-item {% if request.resolver_match.url_name == 'stays' or request.resolver_match.url_name == 'hotel_detail' %}active{% endif %}" href="{% url 'stays' %}">🛏 Stays</a>
+            </nav>
         </div>
-        <nav class="tabs">
-            <a class="tab {% if request.resolver_match.url_name == 'home' %}active{% endif %}" href="{% url 'home' %}">🏠 Home</a>
-            <a class="tab {% if request.resolver_match.url_name == 'stays' or request.resolver_match.url_name == 'hotel_detail' %}active{% endif %}" href="{% url 'stays' %}">🛏️ Stays</a>
-        </nav>
     </header>
 
     {% if messages %}
@@ -35,14 +37,14 @@
     </main>
 
     <footer class="site-footer">
-        <div class="footer-columns">
+        <div class="footer-inner">
             <div>
-                <h4>Discover</h4>
+                <h3>Discover</h3>
                 <a href="{% url 'home' %}">Home</a>
                 <a href="{% url 'stays' %}">All stays</a>
             </div>
             <div>
-                <h4>Popular destinations</h4>
+                <h3>Popular destinations</h3>
                 <a href="{% url 'stays' %}?destination=Goa">Goa hotels</a>
                 <a href="{% url 'stays' %}?destination=Delhi">New Delhi hotels</a>
                 <a href="{% url 'stays' %}?destination=Bangalore">Bangalore hotels</a>
@@ -51,18 +53,17 @@
                 <a href="{% url 'stays' %}?destination=Manali">Manali hotels</a>
             </div>
             <div>
-                <h4>Your account</h4>
+                <h3>Your account</h3>
                 <a href="{% url 'login' %}">Login</a>
                 <a href="{% url 'signup' %}">Sign Up</a>
             </div>
             <div>
-                <h4>About this project</h4>
-                <p>A Django mini project inspired by Booking.com, built to practise templates, URL routing and forms.</p>
+                <h3>About</h3>
+                <p>Booking.com is part of Booking Holdings Inc., the world's leading provider of online travel and related services.</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>Copyright &copy; 2026 Booking.com clone. For learning purposes only.</p>
-        </div>
+        <p class="copyright">Copyright © 1996–2026 Booking.com™. All rights reserved.</p>
     </footer>
 </body>
 </html>
+
