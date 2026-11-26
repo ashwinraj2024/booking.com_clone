@@ -1,0 +1,29 @@
+{% extends "website/base.html" %}
+{% block title %}Stays | Booking.com{% endblock %}
+{% block content %}
+<section class="container section">
+    <h1>Stays</h1>
+    <form class="search-form" action="{% url 'stays' %}" method="get">
+        <input type="text" name="destination" value="{{ destination }}" placeholder="Where are you going?" aria-label="Destination">
+        <button class="button" type="submit">Search</button>
+    </form>
+
+    {% if destination %}
+    <p>{{ hotels|length }} propert{{ hotels|length|pluralize:"y,ies" }} found for "{{ destination }}".</p>
+    {% endif %}
+
+    <div class="grid grid-3">
+        {% for hotel in hotels %}
+        <a class="card hotel-card" href="{% url 'hotel_detail' hotel.id %}">
+            <div class="emoji">{{ hotel.emoji }}</div>
+            <h3>{{ hotel.name }}</h3>
+            <p class="muted">{{ hotel.place }}</p>
+            <p>{{ hotel.description }}</p>
+            <p><span class="rating">{{ hotel.rating }}</span> <strong>{{ hotel.price }}</strong> per night</p>
+        </a>
+        {% empty %}
+        <p>No properties found. Try Goa, Delhi, Bangalore, Jaipur, Udaipur or Manali.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "website/base.html" %}
+{% block title %}Booking.com | Find your next stay{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1>Find your next stay</h1>
+        <p>Search hotels, homes and much more across India.</p>
+        <form class="search-form" action="{% url 'stays' %}" method="get">
+            <input type="text" name="destination" placeholder="Where are you going?" aria-label="Destination">
+            <button class="button" type="submit">Search</button>
+        </form>
+    </div>
+</section>
+
+<section class="container section">
+    <h2>Trending destinations</h2>
+    <div class="grid grid-4">
+        <a class="card destination" href="{% url 'stays' %}?destination=Goa">Goa</a>
+        <a class="card destination" href="{% url 'stays' %}?destination=Delhi">New Delhi</a>
+        <a class="card destination" href="{% url 'stays' %}?destination=Bangalore">Bangalore</a>
+        <a class="card destination" href="{% url 'stays' %}?destination=Jaipur">Jaipur</a>
+    </div>
+</section>
+
+<section class="container section">
+    <h2>Featured stays</h2>
+    <div class="grid grid-3">
+        {% for hotel in featured %}
+        <a class="card hotel-card" href="{% url 'hotel_detail' hotel.id %}">
+            <div class="emoji">{{ hotel.emoji }}</div>
+            <h3>{{ hotel.name }}</h3>
+            <p class="muted">{{ hotel.place }}</p>
+            <p><span class="rating">{{ hotel.rating }}</span> <strong>{{ hotel.price }}</strong> per night</p>
+        </a>
+        {% endfor %}
+    </div>
+    <p><a class="button" href="{% url 'stays' %}">View all stays</a></p>
+</section>
+{% endblock %}

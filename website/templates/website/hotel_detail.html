@@ -1,0 +1,18 @@
+{% extends "website/base.html" %}
+{% block title %}{{ hotel.name }} | Booking.com{% endblock %}
+{% block content %}
+<section class="container section">
+    <p class="muted"><a href="{% url 'home' %}">Home</a> &rsaquo; <a href="{% url 'stays' %}">Stays</a> &rsaquo; {{ hotel.name }}</p>
+    <div class="detail">
+        <div class="emoji big">{{ hotel.emoji }}</div>
+        <div>
+            <h1>{{ hotel.name }}</h1>
+            <p class="muted">{{ hotel.place }}</p>
+            <p><span class="rating">{{ hotel.rating }}</span> Guest rating</p>
+            <p>{{ hotel.description }}</p>
+            <p class="price">{{ hotel.price }} <small>per night</small></p>
+            <a class="button" href="{% url 'stays' %}">Back to all stays</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
